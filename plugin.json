@@ -1,0 +1,13 @@
+{
+    "id": "nodebb-plugin-jira",
+    "name": "NodeBB Jira Plugin",
+    "description": "NodeBB Plugin that integrates jira with the forum.",
+    "url": "https://github.com/cinchcast/nodebb-plugin-jira",
+    "library": "./library.js",
+    "staticDirs": {
+        "jiraplugin": "static"
+    },
+    "hooks": [
+        { "hook": "filter:scripts.get", "method": "addScripts", "callbacked": false }
+    ]
+}
