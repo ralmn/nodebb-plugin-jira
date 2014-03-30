@@ -1,6 +1,6 @@
 {
   "name": "nodebb-plugin-jira",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "NodeBB Plugin that integrates jira with the forum. (ALPHA) NOT READY FOR USE",
   "main": "library.js",
   "scripts": {
