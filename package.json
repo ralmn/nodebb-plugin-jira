@@ -14,7 +14,7 @@
   "author": "Dustin Hilgaertner <dhilgaertner@gmail.com>",
   "license": "BSD",
   "dependencies": {
-    "request": "^2.34.0",
+    "request": "~2.34.0",
     "jira": "~0.8.2"
   },
   "gitHead": "5a3ea84c50a71a17df6f0b5363f9ff2f2be85b68",
