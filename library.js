@@ -6,12 +6,61 @@
     "use strict";
 
     var request = require('request'),
-        socketTopics = module.parent.require('./socket.io/topics');
+        socketTopics = module.parent.require('./socket.io/topics'),
+        meta = module.parent.require('./meta'),
+        JiraApi = require('jira').JiraApi,
+        fs = require('fs'),
+        path = require('path'),
+        templates = module.parent.require('../public/src/templates.js');
 
     var JiraPlugin = {}
-
     var ttl = 60000;
     var cache = {};
+
+    var constants = Object.freeze({
+        'name': "Jira Integration",
+        'admin': {
+            'route': '/jiraplugin',
+            'icon': 'fa-check'
+        }
+    });
+
+    JiraPlugin.registerPlugin = function(custom_header, callback) {
+        custom_header.plugins.push({
+            "route": constants.admin.route,
+            "icon": constants.admin.icon,
+            "name": constants.name
+        });
+
+        return custom_header;
+    };
+
+    JiraPlugin.addRoute = function(custom_routes, callback) {
+        fs.readFile(path.resolve(__dirname, './static/admin.tpl'), function (err, template) {
+            custom_routes.routes.push({
+                "route": constants.admin.route,
+                "method": "get",
+                "options": function(req, res, callback) {
+                    callback({
+                        req: req,
+                        res: res,
+                        route: constants.admin.route,
+                        name: constants.name,
+                        content: template
+                    });
+                }
+            });
+
+            callback(null, custom_routes);
+        });
+    };
+
+    JiraPlugin.addScripts = function(scripts, callback) {
+        return scripts.concat([
+            'plugins/jiraplugin/jquery.regex.js',
+            'plugins/jiraplugin/main.js'
+        ]);
+    };
 
     socketTopics.checkTicket = function(socket, ticketId, callback) {
         var now = Date.now();
@@ -20,28 +69,28 @@
             return callback(null, cache[ticketId].ticket);
         }
 
-//        request({url:"...api here...", method:'POST'}, function (error, response) {
-//            var ticket = response;
-//
-//            setCache(ticket, now, state);
-//            callback(null, state);
-//        });
-        callback(null, true);
+        var protocol = meta.config['jira:protocol'];
+        var domain = meta.config['jira:domain'];
+        var port = meta.config['jira:port'];
+        var username = meta.config['jira:username'];
+        var password = meta.config['jira:password'];
+
+        var jira = new JiraApi(protocol, domain, port, username, password, '2');
+
+        jira.findIssue(ticketId, function(error, ticket) {
+            setCache(ticketId, now, ticket);
+            return callback(null, ticket);
+        });
+
+        callback(null, null);
     };
 
     function setCache(ticketId, now, ticket) {
         cache[ticketId] = {
             expireAt: now + ttl,
-            state: ticket
+            ticket: ticket
         };
     }
-
-    JiraPlugin.addScripts = function(scripts, callback) {
-        return scripts.concat([
-            'plugins/jiraplugin/jquery.regex.js',
-            'plugins/jiraplugin/main.js'
-        ]);
-    };
 
     module.exports = JiraPlugin;
 

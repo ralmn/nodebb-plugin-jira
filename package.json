@@ -1,19 +1,25 @@
 {
-    "name": "nodebb-plugin-jira",
-    "version": "0.0.1",
-    "description": "NodeBB Plugin that integrates jira with the forum.",
-    "main": "library.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "keywords": [
-        "nodebb",
-        "plugin",
-        "jira"
-    ],
-    "author": "Dustin Hilgaertner <dhilgaertner@gmail.com>",
-    "license": "MIT",
-    "dependencies": {
-        "request": "^2.34.0"
-    }
+  "name": "nodebb-plugin-jira",
+  "version": "0.0.2",
+  "description": "NodeBB Plugin that integrates jira with the forum. (ALPHA) NOT READY FOR USE",
+  "main": "library.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cinchcast",
+    "plugin",
+    "jira"
+  ],
+  "author": "Dustin Hilgaertner <dhilgaertner@gmail.com>",
+  "license": "BSD",
+  "dependencies": {
+    "request": "^2.34.0",
+    "jira": "~0.8.2"
+  },
+  "gitHead": "5a3ea84c50a71a17df6f0b5363f9ff2f2be85b68",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cinchcast/nodebb-plugin-jira.git"
+  }
 }
