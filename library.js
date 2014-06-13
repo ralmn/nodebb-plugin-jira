@@ -55,10 +55,10 @@
     };
 
     JiraPlugin.addScripts = function(scripts, callback) {
-        return scripts.concat([
+        callback(null, scripts.concat([
             'plugins/jiraplugin/jquery.regex.js',
             'plugins/jiraplugin/main.js'
-        ]);
+        ]));
     };
 
     socketTopics.checkTicket = function(socket, ticketId, callback) {
