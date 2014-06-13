@@ -25,14 +25,13 @@
         }
     });
 
-    JiraPlugin.registerPlugin = function(custom_header, callback) {
+    JiraPlugin.registerPlugin = function(custom_header) {
         custom_header.plugins.push({
             "route": constants.admin.route,
             "icon": constants.admin.icon,
             "name": constants.name
         });
-
-        return custom_header;
+        callback(null, custom_header);
     };
 
     JiraPlugin.addRoute = function(custom_routes, callback) {

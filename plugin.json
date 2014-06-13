@@ -9,7 +9,7 @@
     },
     "hooks": [
         { "hook": "filter:scripts.get", "method": "addScripts", "callbacked": false },
-        { "hook": "filter:admin.header.build", "method": "registerPlugin", "callbacked": false },
+        { "hook": "filter:admin.header.build", "method": "registerPlugin"},
         { "hook": "filter:admin.create_routes", "method": "addRoute", "callbacked": true }
     ]
 }
