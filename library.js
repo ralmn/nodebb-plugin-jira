@@ -56,8 +56,8 @@
 
     JiraPlugin.addScripts = function(scripts, callback) {
         callback(null, scripts.concat([
-            'plugins/jiraplugin/jquery.regex.js',
-            'plugins/jiraplugin/main.js'
+            './static/jquery.regex.js',
+            './static/jiraplugin/main.js'
         ]));
     };
 
