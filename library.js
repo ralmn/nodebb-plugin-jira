@@ -73,14 +73,14 @@
         var port = meta.config['jira:port'];
         var username = meta.config['jira:username'];
         var password = meta.config['jira:password'];
-
+/*
         var jira = new JiraApi(protocol, domain, port, username, password, '2');
 
         jira.findIssue(ticketId, function(error, ticket) {
             setCache(ticketId, now, ticket);
             return callback(null, ticket);
         });
-
+*/
         callback(null, null);
     };
 
